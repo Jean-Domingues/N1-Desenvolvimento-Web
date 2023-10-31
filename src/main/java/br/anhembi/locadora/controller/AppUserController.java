@@ -10,13 +10,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.anhembi.locadora.dtos.AppUserDto;
 import br.anhembi.locadora.security.AppUser;
-import br.anhembi.locadora.services.UserDetailsServiceImpl;
+import br.anhembi.locadora.services.AppUserService;
 
 @RestController
 @RequestMapping("/user")
 public class AppUserController {
 	@Autowired
-	private UserDetailsServiceImpl service;
+	private AppUserService service;
 
 	@PostMapping
 	public ResponseEntity<AppUser> create(@RequestBody AppUserDto userDto) {

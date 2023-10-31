@@ -10,10 +10,12 @@ import org.springframework.security.authentication.DefaultAuthenticationEventPub
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
 import br.anhembi.locadora.security.AppUser.Role;
-import br.anhembi.locadora.services.UserDetailsServiceImpl;
+import br.anhembi.locadora.services.AppUserService;
 
 @Configuration
 @EnableWebSecurity
@@ -25,12 +27,17 @@ public class SecurityConfig {
 	}
 
 	@Bean
-	CommandLineRunner commandLineRunnerUserDetails(UserDetailsServiceImpl userService) {
+	PasswordEncoder passwordEncoder() {
+		return new BCryptPasswordEncoder();
+	}
+
+	@Bean
+	CommandLineRunner commandLineRunnerUserDetails(AppUserService userService) {
 		return args -> userService.createAdmin("user", "secret");
 	}
 
 	@Bean
-	SecurityFilterChain filterChain(HttpSecurity http, UserDetailsServiceImpl userService) throws Exception {
+	SecurityFilterChain filterChain(HttpSecurity http, AppUserService userService) throws Exception {
 		return http.csrf(csrf -> csrf.disable())
 				.userDetailsService(userService)
 				.authorizeHttpRequests(autorize -> autorize
