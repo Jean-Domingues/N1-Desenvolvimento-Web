@@ -1,30 +1,24 @@
 package br.anhembi.locadora.services;
 
-import java.util.Optional;
-
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import br.anhembi.locadora.repositories.AppUserRepo;
-import br.anhembi.locadora.security.AppUser;
-import br.anhembi.locadora.security.AppUser.Role;
+import br.anhembi.locadora.models.Employee;
+import br.anhembi.locadora.models.Employee.Role;
+import br.anhembi.locadora.repositories.EmployeeRepo;
 import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
-public class AppUserService implements UserDetailsService {
-	private final AppUserRepo userRepo;
+public class EmployeeService implements UserDetailsService {
+	private final EmployeeRepo userRepo;
 	private final PasswordEncoder passwordEncoder;
 
-	public Optional<AppUser> getByUsername(String username) {
-		return userRepo.findByEmail(username);
-	}
-
-	public AppUser createUser(String username, String password) {
-		var user = AppUser.builder()
+	public Employee createUser(String username, String password) {
+		var user = Employee.builder()
 				.email(username)
 				.role(Role.ROLE_USER)
 				.password(passwordEncoder.encode(password))
@@ -32,8 +26,8 @@ public class AppUserService implements UserDetailsService {
 		return userRepo.save(user);
 	}
 
-	public AppUser createAdmin(String username, String password) {
-		var user = AppUser.builder()
+	public Employee createAdmin(String username, String password) {
+		var user = Employee.builder()
 				.email(username)
 				.role(Role.ADMIN)
 				.password(passwordEncoder.encode(password))

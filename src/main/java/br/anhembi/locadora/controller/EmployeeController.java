@@ -8,18 +8,18 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.anhembi.locadora.dtos.AppUserDto;
-import br.anhembi.locadora.security.AppUser;
-import br.anhembi.locadora.services.AppUserService;
+import br.anhembi.locadora.dtos.LoginDto;
+import br.anhembi.locadora.models.Employee;
+import br.anhembi.locadora.services.EmployeeService;
 
 @RestController
 @RequestMapping("/user")
-public class AppUserController {
+public class EmployeeController {
 	@Autowired
-	private AppUserService service;
+	private EmployeeService service;
 
 	@PostMapping
-	public ResponseEntity<AppUser> create(@RequestBody AppUserDto userDto) {
+	public ResponseEntity<Employee> create(@RequestBody LoginDto userDto) {
 		var createUser = service.createUser(userDto.getUsername(), userDto.getPassword());
 
 		return new ResponseEntity<>(createUser, HttpStatus.CREATED);

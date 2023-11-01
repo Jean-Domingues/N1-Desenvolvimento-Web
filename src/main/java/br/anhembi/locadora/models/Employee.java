@@ -1,4 +1,4 @@
-package br.anhembi.locadora.security;
+package br.anhembi.locadora.models;
 
 import java.util.Collection;
 import java.util.List;
@@ -20,7 +20,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class AppUser implements UserDetails {
+public class Employee implements UserDetails {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
@@ -69,4 +69,7 @@ public class AppUser implements UserDetails {
 	public enum Role {
 		ROLE_USER, ADMIN
 	}
+
+	// Employee:
+	// Attributes: Employee ID, first name, last name, job title, phone number, email.
 }
