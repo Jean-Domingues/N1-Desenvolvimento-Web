@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import br.anhembi.locadora.dtos.PatchMovieDTO;
 import br.anhembi.locadora.dtos.PostMovieDTO;
 import br.anhembi.locadora.errors.custom.NotFoundError;
 import br.anhembi.locadora.mappers.MovieMapper;
@@ -22,7 +23,7 @@ public class MovieService {
 
 	public Movie save(PostMovieDTO movieDTO) {
 		var category = categoryRepo.findById(movieDTO.getCategoryId()).orElseThrow(NotFoundError::new);
-		var movie = movieMapper.movieDtoToMovie(movieDTO);
+		var movie = movieMapper.post(movieDTO);
 		movie.setCategory(category);
 		return movieRepo.save(movie);
 	}
@@ -31,7 +32,7 @@ public class MovieService {
 		return movieRepo.findAll();
 	}
 
-	public Movie update(long id, PostMovieDTO movieDTO) {
+	public Movie update(long id, PatchMovieDTO movieDTO) {
 		var movie = movieRepo.findById(id).orElseThrow(NotFoundError::new);
 
 		movieMapper.patch(movieDTO, movie);

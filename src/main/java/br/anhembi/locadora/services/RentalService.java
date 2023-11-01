@@ -38,7 +38,7 @@ public class RentalService {
 		inventory.setQuantity(newQuantity);
 		inventoryRepo.save(inventory);
 
-		var rental = rentalMapper.rentalDtoToRental(rentalDTO);
+		var rental = rentalMapper.post(rentalDTO);
 		rental.setCustomer(customer);
 		rental.setMovie(movie);
 

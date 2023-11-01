@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.anhembi.locadora.dtos.PatchMovieDTO;
 import br.anhembi.locadora.dtos.PostMovieDTO;
 import br.anhembi.locadora.models.Movie;
 import br.anhembi.locadora.services.MovieService;
@@ -38,7 +39,7 @@ public class MovieController {
 	}
 
 	@PatchMapping("/{id}")
-	public ResponseEntity<Movie> update(@PathVariable long id, @Valid @RequestBody PostMovieDTO movieDTO) {
+	public ResponseEntity<Movie> update(@PathVariable long id, @Valid @RequestBody PatchMovieDTO movieDTO) {
 		var movie = movieService.update(id, movieDTO);
 		return ResponseEntity.ok(movie);
 	}

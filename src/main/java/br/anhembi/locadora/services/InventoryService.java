@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import br.anhembi.locadora.dtos.PatchInventoryDTO;
 import br.anhembi.locadora.dtos.PostInventoryDTO;
 import br.anhembi.locadora.errors.custom.BadRequestError;
 import br.anhembi.locadora.errors.custom.NotFoundError;
@@ -27,7 +28,7 @@ public class InventoryService {
 			throw new BadRequestError("Inventory already exists");
 
 		var movie = movieRepo.findById(movieId).orElseThrow(NotFoundError::new);
-		var inventory = inventoryMapper.inventoryDtoToInventory(inventoryDTO);
+		var inventory = inventoryMapper.post(inventoryDTO);
 		inventory.setMovie(movie);
 
 		return inventoryRepo.save(inventory);
@@ -37,7 +38,7 @@ public class InventoryService {
 		return inventoryRepo.findAll();
 	}
 
-	public Inventory update(long movieId, PostInventoryDTO inventoryDTO) {
+	public Inventory update(long movieId, PatchInventoryDTO inventoryDTO) {
 		var inventory = inventoryRepo.findById(movieId).orElseThrow(NotFoundError::new);
 
 		inventoryMapper.patch(inventoryDTO, inventory);

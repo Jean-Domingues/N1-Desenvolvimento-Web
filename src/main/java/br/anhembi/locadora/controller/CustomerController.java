@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.anhembi.locadora.dtos.PatchCustomerDTO;
 import br.anhembi.locadora.dtos.PostCustomerDTO;
 import br.anhembi.locadora.models.Customer;
 import br.anhembi.locadora.services.CustomerService;
@@ -38,7 +39,7 @@ public class CustomerController {
 	}
 
 	@PatchMapping("/{id}")
-	public ResponseEntity<Customer> update(@PathVariable long id, @Valid @RequestBody PostCustomerDTO customerDTO) {
+	public ResponseEntity<Customer> update(@PathVariable long id, @Valid @RequestBody PatchCustomerDTO customerDTO) {
 		var customer = customerService.update(id, customerDTO);
 		return ResponseEntity.ok(customer);
 	}

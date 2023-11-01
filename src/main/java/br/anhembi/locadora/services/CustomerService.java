@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import br.anhembi.locadora.dtos.PatchCustomerDTO;
 import br.anhembi.locadora.dtos.PostCustomerDTO;
 import br.anhembi.locadora.errors.custom.NotFoundError;
 import br.anhembi.locadora.mappers.CustomerMapper;
@@ -18,7 +19,7 @@ public class CustomerService {
 	private final CustomerMapper customerMapper;
 
 	public Customer save(PostCustomerDTO customerDTO) {
-		var movie = customerMapper.customerDtoToCustomer(customerDTO);
+		var movie = customerMapper.post(customerDTO);
 		return customerRepo.save(movie);
 	}
 
@@ -26,7 +27,7 @@ public class CustomerService {
 		return customerRepo.findAll();
 	}
 
-	public Customer update(long id, PostCustomerDTO customerDTO) {
+	public Customer update(long id, PatchCustomerDTO customerDTO) {
 		var customer = customerRepo.findById(id).orElseThrow(NotFoundError::new);
 
 		customerMapper.patch(customerDTO, customer);

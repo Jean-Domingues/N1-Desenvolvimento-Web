@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.anhembi.locadora.dtos.PatchInventoryDTO;
 import br.anhembi.locadora.dtos.PostInventoryDTO;
 import br.anhembi.locadora.models.Inventory;
 import br.anhembi.locadora.services.InventoryService;
@@ -38,7 +39,7 @@ public class InventoryController {
 	}
 
 	@PatchMapping
-	public ResponseEntity<Inventory> update(@PathVariable long movieId, @Valid @RequestBody PostInventoryDTO inventoryDTO) {
+	public ResponseEntity<Inventory> update(@PathVariable long movieId, @Valid @RequestBody PatchInventoryDTO inventoryDTO) {
 		var inventory = inventoryService.update(movieId, inventoryDTO);
 		return ResponseEntity.ok(inventory);
 	}
