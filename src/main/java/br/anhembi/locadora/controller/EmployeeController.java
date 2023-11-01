@@ -8,9 +8,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.anhembi.locadora.dtos.LoginDto;
+import br.anhembi.locadora.dtos.PostEmployeeDto;
 import br.anhembi.locadora.models.Employee;
 import br.anhembi.locadora.services.EmployeeService;
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/user")
@@ -19,7 +20,7 @@ public class EmployeeController {
 	private EmployeeService service;
 
 	@PostMapping
-	public ResponseEntity<Employee> create(@RequestBody LoginDto userDto) {
+	public ResponseEntity<Employee> create(@Valid @RequestBody PostEmployeeDto userDto) {
 		var createUser = service.createUser(userDto.getUsername(), userDto.getPassword());
 
 		return new ResponseEntity<>(createUser, HttpStatus.CREATED);
