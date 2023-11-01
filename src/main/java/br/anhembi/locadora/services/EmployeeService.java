@@ -29,7 +29,7 @@ public class EmployeeService implements UserDetailsService {
 	public Employee createAdmin(String username, String password) {
 		var user = Employee.builder()
 				.email(username)
-				.role(Role.ADMIN)
+				.role(Role.ROLE_ADMIN)
 				.password(passwordEncoder.encode(password))
 				.build();
 		return userRepo.save(user);

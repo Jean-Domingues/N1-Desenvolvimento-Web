@@ -16,7 +16,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
 import br.anhembi.locadora.models.Category;
-import br.anhembi.locadora.models.Employee.Role;
 import br.anhembi.locadora.services.CategoryService;
 import br.anhembi.locadora.services.EmployeeService;
 
@@ -50,9 +49,9 @@ public class SecurityConfig {
 		return http.csrf(csrf -> csrf.disable())
 				.userDetailsService(userService)
 				.authorizeHttpRequests(autorize -> autorize
-						.requestMatchers("/employee/**").hasRole(Role.ADMIN.name())
-						.requestMatchers(HttpMethod.DELETE, "/movies/**").hasRole(Role.ADMIN.name())
-						.requestMatchers(HttpMethod.DELETE, "/customers/**").hasRole(Role.ADMIN.name())
+						.requestMatchers("/employee/**").hasRole("ADMIN")
+						.requestMatchers(HttpMethod.DELETE, "/movies/**").hasRole("ADMIN")
+						.requestMatchers(HttpMethod.DELETE, "/customers/**").hasRole("ADMIN")
 						.anyRequest().authenticated())
 				.httpBasic(Customizer.withDefaults())
 				.build();

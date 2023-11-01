@@ -16,9 +16,13 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
+@Getter
+@Setter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -71,7 +75,7 @@ public class Employee implements UserDetails {
 	}
 
 	public enum Role {
-		ROLE_USER, ADMIN
+		ROLE_USER, ROLE_ADMIN
 	}
 
 	// Employee:
