@@ -14,14 +14,14 @@ import br.anhembi.locadora.services.EmployeeService;
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/employee")
 public class EmployeeController {
 	@Autowired
 	private EmployeeService service;
 
 	@PostMapping
-	public ResponseEntity<Employee> create(@Valid @RequestBody PostEmployeeDto userDto) {
-		var createUser = service.createUser(userDto.getUsername(), userDto.getPassword());
+	public ResponseEntity<Employee> create(@Valid @RequestBody PostEmployeeDto employeeDto) {
+		var createUser = service.createUser(employeeDto.getUsername(), employeeDto.getPassword());
 
 		return new ResponseEntity<>(createUser, HttpStatus.CREATED);
 	}

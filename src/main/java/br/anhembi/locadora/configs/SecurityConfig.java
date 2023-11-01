@@ -50,7 +50,7 @@ public class SecurityConfig {
 		return http.csrf(csrf -> csrf.disable())
 				.userDetailsService(userService)
 				.authorizeHttpRequests(autorize -> autorize
-						.requestMatchers("/user").permitAll()
+						.requestMatchers("/employee/**").hasRole(Role.ADMIN.name())
 						.requestMatchers(HttpMethod.DELETE, "/movies/**").hasRole(Role.ADMIN.name())
 						.requestMatchers(HttpMethod.DELETE, "/customers/**").hasRole(Role.ADMIN.name())
 						.anyRequest().authenticated())
