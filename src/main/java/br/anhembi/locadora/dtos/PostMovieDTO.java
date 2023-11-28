@@ -18,11 +18,7 @@ public class PostMovieDTO {
 	private String title;
 	@NotBlank
 	private String description;
-	@NotBlank
-	private String genre;
-	@NotBlank
 	private String ageRating;
-	@NotBlank
 	private String director;
 	@NotBlank
 	private String imageLink;

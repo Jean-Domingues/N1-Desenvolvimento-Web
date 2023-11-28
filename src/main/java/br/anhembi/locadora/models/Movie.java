@@ -33,12 +33,10 @@ public class Movie {
 	@Column(nullable = false)
 	private String description;
 	@Column(nullable = false)
-	private String genre;
-	@Column(nullable = false)
 	private String ageRating;
-	@Column(nullable = false)
+	@Column(nullable = true)
 	private String director;
-	@Column(nullable = false)
+	@Column(nullable = true)
 	private String imageLink;
 	@Column(nullable = false)
 	private LocalDateTime createdAt;
