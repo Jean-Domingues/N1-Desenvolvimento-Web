@@ -39,6 +39,8 @@ public class Movie {
 	@Column(nullable = false)
 	private String director;
 	@Column(nullable = false)
+	private String imageLink;
+	@Column(nullable = false)
 	private LocalDateTime createdAt;
 	@Column(nullable = false)
 	private LocalDateTime updatedAt;

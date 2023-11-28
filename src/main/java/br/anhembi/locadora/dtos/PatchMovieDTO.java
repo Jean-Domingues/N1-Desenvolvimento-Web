@@ -16,4 +16,5 @@ public class PatchMovieDTO {
 	private String genre;
 	private String ageRating;
 	private String director;
+	private String imageLink;
 }

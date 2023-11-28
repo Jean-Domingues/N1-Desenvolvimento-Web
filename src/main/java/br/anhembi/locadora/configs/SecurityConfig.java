@@ -37,11 +37,14 @@ public class SecurityConfig {
 	CommandLineRunner commandLineRunnerUserDetails(EmployeeService employeeService, CategoryService categoryService) {
 		return args -> {
 			employeeService.createAdmin("user", "secret");
-			categoryService.save(Category.builder().name("Categoria 1").build());
-			categoryService.save(Category.builder().name("Categoria 2").build());
-			categoryService.save(Category.builder().name("Categoria 3").build());
-			categoryService.save(Category.builder().name("Categoria 4").build());
-		};
+			categoryService.save(Category.builder().name("Comédia").build());
+			categoryService.save(Category.builder().name("Terror").build());
+			categoryService.save(Category.builder().name("Drama").build());
+			categoryService.save(Category.builder().name("Documentário").build());
+			categoryService.save(Category.builder().name("Romance").build());
+			categoryService.save(Category.builder().name("Ação").build());
+			categoryService.save(Category.builder().name("Suspense").build());
+		}; 
 	}
 
 	@Bean

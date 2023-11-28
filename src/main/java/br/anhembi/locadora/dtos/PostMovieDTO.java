@@ -24,4 +24,6 @@ public class PostMovieDTO {
 	private String ageRating;
 	@NotBlank
 	private String director;
+	@NotBlank
+	private String imageLink;
 }
