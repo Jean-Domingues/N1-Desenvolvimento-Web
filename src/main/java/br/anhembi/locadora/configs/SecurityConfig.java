@@ -14,6 +14,9 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import br.anhembi.locadora.models.Category;
 import br.anhembi.locadora.services.CategoryService;
@@ -44,12 +47,13 @@ public class SecurityConfig {
 			categoryService.save(Category.builder().name("Romance").build());
 			categoryService.save(Category.builder().name("Ação").build());
 			categoryService.save(Category.builder().name("Suspense").build());
-		}; 
+		};
 	}
 
 	@Bean
 	SecurityFilterChain filterChain(HttpSecurity http, EmployeeService userService) throws Exception {
 		return http.csrf(csrf -> csrf.disable())
+				.cors(cors -> cors.configurationSource(corsConfigurationSource()))
 				.userDetailsService(userService)
 				.authorizeHttpRequests(autorize -> autorize
 						.requestMatchers("/employee/**").hasRole("ADMIN")
@@ -58,5 +62,17 @@ public class SecurityConfig {
 						.anyRequest().authenticated())
 				.httpBasic(Customizer.withDefaults())
 				.build();
+	}
+
+	public CorsConfigurationSource corsConfigurationSource() {
+		CorsConfiguration configuration = new CorsConfiguration();
+		configuration.addAllowedOrigin("*");
+		configuration.addAllowedMethod("*");
+		configuration.addAllowedHeader("*");
+
+		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+		source.registerCorsConfiguration("/**", configuration);
+
+		return source;
 	}
 }
