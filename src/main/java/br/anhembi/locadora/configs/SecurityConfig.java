@@ -39,7 +39,7 @@ public class SecurityConfig {
 	@Bean
 	CommandLineRunner commandLineRunnerUserDetails(EmployeeService employeeService, CategoryService categoryService) {
 		return args -> {
-			employeeService.createAdmin("user", "secret");
+			employeeService.createAdmin("admin@teste.com", "secret");
 			categoryService.save(Category.builder().name("Comédia").build());
 			categoryService.save(Category.builder().name("Terror").build());
 			categoryService.save(Category.builder().name("Drama").build());

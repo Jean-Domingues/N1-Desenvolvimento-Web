@@ -34,7 +34,7 @@ public class RentalService {
 
 		var newQuantity = inventory.getQuantity() - rentalDTO.getQuantity();
 		if (newQuantity < 0)
-			throw new BadRequestError("Not enough  itens in inventory");
+			throw new BadRequestError("Não há itens disponíveis no inventário!");
 		inventory.setQuantity(newQuantity);
 		inventoryRepo.save(inventory);
 
